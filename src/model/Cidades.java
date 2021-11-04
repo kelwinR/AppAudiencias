@@ -10,10 +10,11 @@ package model;
  * @author kelwin.rodrigues
  */
 public class Cidades {
+    
     private int id;
     private String nome;
-    private String cep;
     private int id_estado;
+
 
     public int getId() {
         return id;
@@ -31,19 +32,14 @@ public class Cidades {
         this.nome = nome;
     }
 
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
     public int getId_estado() {
         return id_estado;
     }
 
     public void setId_estado(int id_estado) {
         this.id_estado = id_estado;
-    }        
+    }
+
+   
+    
 }

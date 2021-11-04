@@ -23,7 +23,47 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import model.Estados;
 
+/**
+ *
+ * @author Windows 10
+ */
 public class EstadosController {
+  
+    public Estados buscar(String codigo)
+    {
+        Estados objEstados = null;
+        try {
+            Connection con = Conexao.getConnection();
+            ResultSet rs = null;
+            PreparedStatement stmt = null;
+           
+            String wSQL = " SELECT * FROM estados WHERE id = ? ";
+            stmt = con.prepareStatement(wSQL);
+            stmt.setInt(1, Integer.parseInt(codigo));   
+    
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                objEstados = new Estados();
+                
+                objEstados.setId(rs.getInt("id"));
+                objEstados.setNome(rs.getString("nome"));
+                objEstados.setSigla(rs.getString("sigla"));
+
+            }
+              
+        } catch (SQLException ex ){
+            System.out.println("ERRO de SQL: " + ex.getMessage());
+            return null;
+        }catch (Exception e) {
+            System.out.println("ERRO: " + e.getMessage());
+            return null;
+        }
+        
+        return objEstados;
+		
+    }
+    
     public boolean verificaExistencia(Estados objeto)
     {
         try {
@@ -32,7 +72,7 @@ public class EstadosController {
             ResultSet rs = null;
             PreparedStatement stmt = null;
            
-            String wSQL = " SELECT id_estado FROM estado WHERE nome = ? ";
+            String wSQL = " SELECT id FROM estados WHERE nome = ? ";
             stmt = con.prepareStatement(wSQL);
             stmt.setString(1, objeto.getNome());    
     
@@ -65,7 +105,7 @@ public class EstadosController {
                 return "Estado já Existe";
             }else{
            
-                String wSQL = " INSERT INTO estado VALUES(DEFAULT, ?, ?)";
+                String wSQL = " INSERT INTO estados VALUES(DEFAULT, ?, ?)";
                 stmt = con.prepareStatement(wSQL);
                 stmt.setString(1, objeto.getNome());    
                 stmt.setString(2, objeto.getSigla());            
@@ -73,6 +113,7 @@ public class EstadosController {
                 stmt.executeUpdate();
                 
                 return "";
+            
             }
               
         } catch (SQLException ex ){
@@ -83,7 +124,8 @@ public class EstadosController {
             return "Erro";
         }finally{
             return "";
-        }	
+        }
+		
     }
     
     public boolean alterar(Estados objeto){
@@ -91,14 +133,16 @@ public class EstadosController {
             Connection con = Conexao.getConnection();
             PreparedStatement stmt = null;
             
-            String wSQL = " UPDATE estado SET nome = ?, sigla = ? WHERE id_estado = ?";
+            //VALIDAR SE O LOGIN EXISTE
+                String wSQL = " UPDATE estados SET nome = ?, sigla = ? WHERE id = ?";
                 stmt = con.prepareStatement(wSQL);
                 stmt.setString(1, objeto.getNome());              
                 stmt.setString(2, objeto.getSigla()); 
+
                 stmt.executeUpdate();
                 
                 return true;
-     
+              
         } catch (SQLException ex ){
             System.out.println("ERRO de SQL: " + ex.getMessage());
             return false;
@@ -110,41 +154,30 @@ public class EstadosController {
         }
     } 
     
-    public Estados buscar(String codigo)
+    public boolean excluir(String codigo)
     {
-        Estados objEstados = null;
         try {
             Connection con = Conexao.getConnection();
-            ResultSet rs = null;
             PreparedStatement stmt = null;
-           
-            String wSQL = " SELECT * FROM estado WHERE id_estado = ? ";
+              
+            String wSQL = " UPDATE estados SET excluido = true WHERE id = ? ";
             stmt = con.prepareStatement(wSQL);
-            stmt.setInt(1, Integer.parseInt(codigo));   
-    
-            rs = stmt.executeQuery();
-            
-            if(rs.next()){
-                objEstados = new Estados();
-                
-                objEstados.setId_estado(rs.getInt("id_estado"));
-                objEstados.setNome(rs.getString("estado"));
-                objEstados.setSigla(rs.getString("sigla"));
+            stmt.setInt(1, Integer.parseInt(codigo));
 
-            }
+            stmt.executeUpdate();
+            
+            return true;
               
         } catch (SQLException ex ){
             System.out.println("ERRO de SQL: " + ex.getMessage());
-            return null;
+            return false;
         }catch (Exception e) {
             System.out.println("ERRO: " + e.getMessage());
-            return null;
-        }
-        
-        return objEstados;
+            return false;
+        }		
     }
     
-    public void preencher(JTable jtbEstado) {
+    public void preencher(JTable jtbUsuarios) {
 
         Conexao.abreConexao();
         
@@ -159,7 +192,7 @@ public class EstadosController {
         
         try {
 
-            String wSql = " SELECT id_estado, nome FROM estado ORDER BY nome ";
+            String wSql = " SELECT id, nome FROM estados";
             
             result = Conexao.stmt.executeQuery(wSql);
             
@@ -180,7 +213,7 @@ public class EstadosController {
             System.out.println(e);
         }        
 
-        jtbEstado.setModel(new DefaultTableModel(dadosTabela, cabecalhos) {
+        jtbUsuarios.setModel(new DefaultTableModel(dadosTabela, cabecalhos) {
 
 
             @Override
@@ -192,7 +225,7 @@ public class EstadosController {
 
 
         // permite seleção de apenas uma linha da tabela
-        jtbEstado.setSelectionMode(0);
+        jtbUsuarios.setSelectionMode(0);
 
 
         // redimensiona as colunas de uma tabela
@@ -200,7 +233,7 @@ public class EstadosController {
         for (int i = 0; i <= 2; i++) {
             column = 
 
-            jtbEstado.getColumnModel().getColumn(i);
+            jtbUsuarios.getColumnModel().getColumn(i);
             switch (i) {
                 case 0:
                     column.setPreferredWidth(60);//id 
@@ -215,7 +248,7 @@ public class EstadosController {
         }
         
         //função para deixar a tabela zebrada
-        jtbEstado.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+        jtbUsuarios.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value,
                     boolean isSelected, boolean hasFocus, int row, int column) 
@@ -231,5 +264,6 @@ public class EstadosController {
                 return this;
             }
         });
+        //return (true);
     }
 }

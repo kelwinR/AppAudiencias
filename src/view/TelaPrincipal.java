@@ -5,6 +5,8 @@
  */
 package view;
 
+import tools.CaixaDeDialogo;
+
 /**
  *
  * @author Windows 10
@@ -27,82 +29,211 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTitulo = new javax.swing.JLabel();
-        lblFundo = new javax.swing.JLabel();
-        jmBarra = new javax.swing.JMenuBar();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        menEstados = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
+        jmiEstados = new javax.swing.JMenuItem();
+        jmiCidades = new javax.swing.JMenuItem();
+        jmiMagistrados = new javax.swing.JMenuItem();
+        jmiTipoParte = new javax.swing.JMenuItem();
+        jmiOrgJulg = new javax.swing.JMenuItem();
+        jmiClassAcao = new javax.swing.JMenuItem();
+        jmiComp = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximizedBounds(new java.awt.Rectangle(0, 0, 510, 340));
-        setMaximumSize(new java.awt.Dimension(510, 340));
+        setResizable(false);
         getContentPane().setLayout(null);
 
-        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo.setText("AUDIÊNCIAS");
-        getContentPane().add(lblTitulo);
-        lblTitulo.setBounds(10, 11, 480, 14);
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
-        lblFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/fundo.jpg"))); // NOI18N
-        getContentPane().add(lblFundo);
-        lblFundo.setBounds(0, -30, 510, 370);
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(10, 80, 260, 190);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jComboBox1);
+        jComboBox1.setBounds(10, 50, 170, 20);
+
+        jButton1.setText("jButton1");
+        getContentPane().add(jButton1);
+        jButton1.setBounds(190, 50, 73, 23);
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("AUDIÊNCIAS");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 10, 400, 30);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/fundo.jpg"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 400, 280);
 
         jMenu1.setText("Cadastrar");
 
-        menEstados.setText("Cad. Estados");
-        menEstados.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menEstadosMouseClicked(evt);
-            }
-        });
-        menEstados.addActionListener(new java.awt.event.ActionListener() {
+        jmiEstados.setText("Estados");
+        jmiEstados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menEstadosActionPerformed(evt);
+                jmiEstadosActionPerformed(evt);
             }
         });
-        jMenu1.add(menEstados);
+        jMenu1.add(jmiEstados);
 
-        jMenu4.setText("jMenu4");
-        jMenu1.add(jMenu4);
+        jmiCidades.setText("Cidades");
+        jmiCidades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCidadesActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmiCidades);
 
-        jMenu5.setText("jMenu5");
-        jMenu1.add(jMenu5);
+        jmiMagistrados.setText("Magistrados");
+        jmiMagistrados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiMagistradosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmiMagistrados);
 
-        jmBarra.add(jMenu1);
+        jmiTipoParte.setText("Tipo de parte");
+        jmiTipoParte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiTipoParteActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmiTipoParte);
 
-        jMenu2.setText("Edit");
-        jmBarra.add(jMenu2);
+        jmiOrgJulg.setText("Orgão Julgador");
+        jmiOrgJulg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiOrgJulgActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmiOrgJulg);
 
-        setJMenuBar(jmBarra);
+        jmiClassAcao.setText("Classe da Ação");
+        jmiClassAcao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiClassAcaoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmiClassAcao);
 
-        setSize(new java.awt.Dimension(516, 380));
+        jmiComp.setText("Competência");
+        jmiComp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCompActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmiComp);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Marcar Audiência");
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Alterar Audiência");
+        jMenuBar1.add(jMenu3);
+
+        setJMenuBar(jMenuBar1);
+
+        setSize(new java.awt.Dimension(416, 339));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menEstadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menEstadosActionPerformed
+    private void jmiEstadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiEstadosActionPerformed
         // TODO add your handling code here:
-        try{
+         try{
             TelaEstados tela = new TelaEstados();
             tela.setVisible(true);
 
         }catch(Exception ex){
-            // CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao sair do programa");
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao sair do programa");
         }
-    }//GEN-LAST:event_menEstadosActionPerformed
+    }//GEN-LAST:event_jmiEstadosActionPerformed
 
-    private void menEstadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menEstadosMouseClicked
+    private void jmiCidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCidadesActionPerformed
         // TODO add your handling code here:
         try{
-            TelaEstados tela = new TelaEstados();
+            TelaCidades tela = new TelaCidades();
             tela.setVisible(true);
 
         }catch(Exception ex){
-            // CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao sair do programa");
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao sair do programa");
         }
-    }//GEN-LAST:event_menEstadosMouseClicked
+    }//GEN-LAST:event_jmiCidadesActionPerformed
+
+    private void jmiMagistradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiMagistradosActionPerformed
+        // TODO add your handling code here:
+        try{
+            TelaMagistrados tela = new TelaMagistrados();
+            tela.setVisible(true);
+
+        }catch(Exception ex){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao sair do programa");
+        }
+    }//GEN-LAST:event_jmiMagistradosActionPerformed
+
+    private void jmiTipoParteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiTipoParteActionPerformed
+        // TODO add your handling code here:
+        try{
+            TelaTipoParte tela = new TelaTipoParte();
+            tela.setVisible(true);
+
+        }catch(Exception ex){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao sair do programa");
+        }
+    }//GEN-LAST:event_jmiTipoParteActionPerformed
+
+    private void jmiCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCompActionPerformed
+        // TODO add your handling code here:
+      /*  try{
+            Tela tela = new TelaTipoParte();
+            tela.setVisible(true);
+
+        }catch(Exception ex){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao sair do programa");
+        }*/
+    }//GEN-LAST:event_jmiCompActionPerformed
+
+    private void jmiOrgJulgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiOrgJulgActionPerformed
+        // TODO add your handling code here:
+        try{
+            TelaOrgJulg tela = new TelaOrgJulg();
+            tela.setVisible(true);
+
+        }catch(Exception ex){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao sair do programa");
+        }
+    }//GEN-LAST:event_jmiOrgJulgActionPerformed
+
+    private void jmiClassAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiClassAcaoActionPerformed
+        // TODO add your handling code here:
+        try{
+            TelaClassAcao tela = new TelaClassAcao();
+            tela.setVisible(true);
+
+        }catch(Exception ex){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao sair do programa");
+        }
+    }//GEN-LAST:event_jmiClassAcaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -140,13 +271,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenuBar jmBarra;
-    private javax.swing.JLabel lblFundo;
-    private javax.swing.JLabel lblTitulo;
-    private javax.swing.JMenu menEstados;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JMenuItem jmiCidades;
+    private javax.swing.JMenuItem jmiClassAcao;
+    private javax.swing.JMenuItem jmiComp;
+    private javax.swing.JMenuItem jmiEstados;
+    private javax.swing.JMenuItem jmiMagistrados;
+    private javax.swing.JMenuItem jmiOrgJulg;
+    private javax.swing.JMenuItem jmiTipoParte;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,19 +7,20 @@ package model;
 
 /**
  *
- * @author Windows 10
+ * @author kelwin.rodrigues
  */
 public class Estados {
-    private int id_estado;
+    
+    private int id;
     private String nome;
     private String sigla;
 
-    public int getId_estado() {
-        return id_estado;
+    public int getId() {
+        return id;
     }
 
-    public void setId_estado(int id_estado) {
-        this.id_estado = id_estado;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -37,8 +38,7 @@ public class Estados {
     public void setSigla(String sigla) {
         this.sigla = sigla;
     }
-    
-    
+
     
     
 }

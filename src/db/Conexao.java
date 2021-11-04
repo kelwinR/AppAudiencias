@@ -9,12 +9,16 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ *
+ * @author Windows 10
+ */
 public class Conexao {
     
     private final static String DRIVER = "org.postgresql.Driver";
     private final static String URL = "jdbc:postgresql://localhost:5432/audiencias";
     private final static String USER = "postgres";
-    private final static String PASS = "postgres";  
+    private final static String PASS = "123";  
     
     public static Connection con;
     public static Statement stmt;
