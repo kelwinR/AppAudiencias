@@ -49,7 +49,6 @@ public class OrgJulgController {
                 
                 objOrgJulg.setId(rs.getInt("id"));
                 objOrgJulg.setNome(rs.getString("nome"));
-                objOrgJulg.setExcluido(rs.getBoolean("excluido"));
 
             }
               
@@ -164,7 +163,7 @@ public class OrgJulgController {
             Connection con = Conexao.getConnection();
             PreparedStatement stmt = null;
               
-            String wSQL = " UPDATE org_julg SET excluido = true WHERE id = ? ";
+            String wSQL = " DELETE FROM org_julg WHERE id = ? ";
             stmt = con.prepareStatement(wSQL);
             stmt.setInt(1, Integer.parseInt(codigo));
 
@@ -196,7 +195,7 @@ public class OrgJulgController {
         
         try {
 
-            String wSql = " SELECT id, nome FROM org_julg WHERE COALESCE(excluido,false) = false ORDER BY nome ";
+            String wSql = " SELECT id, nome FROM org_julg ORDER BY nome ";
             
             result = Conexao.stmt.executeQuery(wSql);
             

@@ -49,7 +49,6 @@ public class MagistradosController {
                 
                 objMagistrados.setId(rs.getInt("id"));
                 objMagistrados.setNome(rs.getString("nome"));
-                objMagistrados.setExcluido(rs.getBoolean("excluido"));
 
             }
               
@@ -164,7 +163,7 @@ public class MagistradosController {
             Connection con = Conexao.getConnection();
             PreparedStatement stmt = null;
               
-            String wSQL = " UPDATE magistrados SET excluido = true WHERE id = ? ";
+            String wSQL = " DELETE FROM magistrados WHERE id = ? ";
             stmt = con.prepareStatement(wSQL);
             stmt.setInt(1, Integer.parseInt(codigo));
 
@@ -196,7 +195,7 @@ public class MagistradosController {
         
         try {
 
-            String wSql = " SELECT id, nome FROM magistrados WHERE COALESCE(excluido,false) = false ORDER BY nome ";
+            String wSql = " SELECT id, nome FROM magistrados ORDER BY nome ";
             
             result = Conexao.stmt.executeQuery(wSql);
             

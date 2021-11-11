@@ -32,7 +32,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -44,6 +44,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jmiOrgJulg = new javax.swing.JMenuItem();
         jmiClassAcao = new javax.swing.JMenuItem();
         jmiComp = new javax.swing.JMenuItem();
+        jmiStatus = new javax.swing.JMenuItem();
+        jmiEventos = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
 
@@ -71,9 +73,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jComboBox1);
         jComboBox1.setBounds(10, 50, 170, 20);
 
-        jButton1.setText("jButton1");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(190, 50, 73, 23);
+        btnBuscar.setText("BUSCAR");
+        getContentPane().add(btnBuscar);
+        btnBuscar.setBounds(190, 50, 73, 23);
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -144,6 +146,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jmiComp);
 
+        jmiStatus.setText("Status");
+        jmiStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiStatusActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmiStatus);
+
+        jmiEventos.setText("Eventos");
+        jmiEventos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiEventosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmiEventos);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Marcar Audiência");
@@ -204,13 +222,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jmiCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCompActionPerformed
         // TODO add your handling code here:
-      /*  try{
-            Tela tela = new TelaTipoParte();
+      try{
+            TelaComp tela = new TelaComp();
             tela.setVisible(true);
 
         }catch(Exception ex){
             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao sair do programa");
-        }*/
+        }
     }//GEN-LAST:event_jmiCompActionPerformed
 
     private void jmiOrgJulgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiOrgJulgActionPerformed
@@ -234,6 +252,28 @@ public class TelaPrincipal extends javax.swing.JFrame {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao sair do programa");
         }
     }//GEN-LAST:event_jmiClassAcaoActionPerformed
+
+    private void jmiStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiStatusActionPerformed
+        // TODO add your handling code here:
+        try{
+            TelaStatus tela = new TelaStatus();
+            tela.setVisible(true);
+
+        }catch(Exception ex){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao sair do programa");
+        }
+    }//GEN-LAST:event_jmiStatusActionPerformed
+
+    private void jmiEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiEventosActionPerformed
+        // TODO add your handling code here:
+         try{
+            TelaEventos tela = new TelaEventos();
+            tela.setVisible(true);
+
+        }catch(Exception ex){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao sair do programa");
+        }
+    }//GEN-LAST:event_jmiEventosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,7 +311,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -285,8 +325,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiClassAcao;
     private javax.swing.JMenuItem jmiComp;
     private javax.swing.JMenuItem jmiEstados;
+    private javax.swing.JMenuItem jmiEventos;
     private javax.swing.JMenuItem jmiMagistrados;
     private javax.swing.JMenuItem jmiOrgJulg;
+    private javax.swing.JMenuItem jmiStatus;
     private javax.swing.JMenuItem jmiTipoParte;
     // End of variables declaration//GEN-END:variables
 }

@@ -49,7 +49,6 @@ public class CompController {
                 
                 objComp.setId(rs.getInt("id"));
                 objComp.setNome(rs.getString("nome"));
-                objComp.setExcluido(rs.getBoolean("excluido"));
 
             }
               
@@ -196,7 +195,7 @@ public class CompController {
         
         try {
 
-            String wSql = " SELECT id, nome FROM comp WHERE COALESCE(excluido,false) = false ORDER BY nome ";
+            String wSql = " SELECT id, nome FROM comp ORDER BY nome ";
             
             result = Conexao.stmt.executeQuery(wSql);
             

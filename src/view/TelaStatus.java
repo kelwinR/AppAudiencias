@@ -6,7 +6,7 @@
 package view;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
-import controller.ClassAcaoController;
+import controller.StatusController;
 import tools.Validacao;
 import db.Conexao;
 import java.sql.Connection;
@@ -14,7 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.UIManager;
-import model.ClassAcao;
+import model.Status;
 import tools.CaixaDeDialogo;
 import tools.Combo;
 
@@ -22,13 +22,13 @@ import tools.Combo;
  *
  * @author kelwin.rodrigues
  */
-public class TelaClassAcao extends javax.swing.JFrame {
-            ClassAcaoController objClassAcaoController;
+public class TelaStatus extends javax.swing.JFrame {
+            StatusController StatusController;
 
     /**
      * Creates new form TelaUsuarios
      */
-    public TelaClassAcao() {
+    public TelaStatus() {
         initComponents();
           atualizarTabela();
           limparTela();
@@ -49,18 +49,16 @@ public class TelaClassAcao extends javax.swing.JFrame {
         jblSalvar = new javax.swing.JButton();
         lblId = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtbClassAcao = new javax.swing.JTable();
+        jtbStatus = new javax.swing.JTable();
         btnLimpar = new javax.swing.JButton();
-        txtLeg = new javax.swing.JTextField();
         lbNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
-        lbLogin = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro Classe da Ação", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de Status", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
 
         jblSalvar.setText("SALVAR");
         jblSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -71,7 +69,7 @@ public class TelaClassAcao extends javax.swing.JFrame {
 
         lblId.setText("ID");
 
-        jtbClassAcao.setModel(new javax.swing.table.DefaultTableModel(
+        jtbStatus.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -82,12 +80,12 @@ public class TelaClassAcao extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jtbClassAcao.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtbStatus.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jtbClassAcaoMousePressed(evt);
+                jtbStatusMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(jtbClassAcao);
+        jScrollPane1.setViewportView(jtbStatus);
 
         btnLimpar.setText("LIMPAR");
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -96,9 +94,7 @@ public class TelaClassAcao extends javax.swing.JFrame {
             }
         });
 
-        lbNome.setText("Nome");
-
-        lbLogin.setText("Legislação");
+        lbNome.setText("Status");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -106,18 +102,17 @@ public class TelaClassAcao extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lbLogin)
-                    .addComponent(lbNome)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
-                    .addComponent(txtNome)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(lbNome)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                        .addComponent(txtNome))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jblSalvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLimpar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblId))
-                    .addComponent(txtLeg))
+                        .addComponent(lblId)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -128,17 +123,13 @@ public class TelaClassAcao extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbLogin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtLeg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jblSalvar)
                     .addComponent(btnLimpar)
                     .addComponent(lblId))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -160,28 +151,28 @@ public class TelaClassAcao extends javax.swing.JFrame {
           boolean retorno = validarDados();
         if(retorno){
             
-            ClassAcao class_acao = guardarDados();
+            Status status = guardarDados();
             //SALVAR NO BANCO DE DADOS
             
-          ClassAcaoController objClassAcaoController = new ClassAcaoController();
+          StatusController objStatusController = new StatusController();
            
            if(lblId.getText().equals("ID")){
-               String ret = objClassAcaoController.incluir(class_acao);
+               String ret = objStatusController.incluir(status);
                if(ret.equals("")){
-                   CaixaDeDialogo.obterinstancia().exibirMensagem("Classe da ação incluída com sucesso");
+                   CaixaDeDialogo.obterinstancia().exibirMensagem("Status incluído com sucesso");
                    limparTela();
            }else{
-                   CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao incluir classe da ação");
+                   CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao incluir status");
                }
           
         }else{
-           class_acao.setId(Integer.parseInt(lblId.getText()));
-           boolean ret = objClassAcaoController.alterar(class_acao);
+           status.setId(Integer.parseInt(lblId.getText()));
+           boolean ret = objStatusController.alterar(status);
            if(ret){
-               CaixaDeDialogo.obterinstancia().exibirMensagem("Classe da ação alteraao com sucesso");
+               CaixaDeDialogo.obterinstancia().exibirMensagem("Status alterado com sucesso");
                limparTela();
            }else{
-                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao alterar classe da ação");
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao alterar status");
            }
         }
         }
@@ -189,28 +180,28 @@ public class TelaClassAcao extends javax.swing.JFrame {
         atualizarTabela();
     }//GEN-LAST:event_jblSalvarActionPerformed
 
-    private void jtbClassAcaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbClassAcaoMousePressed
+    private void jtbStatusMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbStatusMousePressed
         // TODO add your handling code here:
          try {
             //pega a linha selecionada
-            int linhaSelecionada = jtbClassAcao.getSelectedRow();
+            int linhaSelecionada = jtbStatus.getSelectedRow();
 
             // Primeira coluna da linha
-            String codigo = jtbClassAcao.getModel().getValueAt(linhaSelecionada, 0).toString();
+            String codigo = jtbStatus.getModel().getValueAt(linhaSelecionada, 0).toString();
 
             //buscar no banco de dados o registro e preencher nos campos da tela
-           ClassAcaoController objClassAcaoController = new ClassAcaoController();
-            ClassAcao objeto = objClassAcaoController.buscar(codigo);
+           StatusController objStatusController = new StatusController();
+            Status objeto = objStatusController.buscar(codigo);
                 
             //Verifica se clicou na coluna 2 => EXCLUIR
-            if (jtbClassAcao.isColumnSelected(2)) {
+            if (jtbStatus.isColumnSelected(2)) {
                 try {
                     boolean wPergunta = CaixaDeDialogo.obterinstancia()
                             .pedirConfirmacao("Tem certeza de que deseja excluir?", "", 'p');
                     if (wPergunta == true) {
                         //exclusão do registro selecionado
-                        objClassAcaoController = new ClassAcaoController();
-                        boolean retorno = objClassAcaoController.excluir(codigo);
+                        objStatusController = new StatusController();
+                        boolean retorno = objStatusController.excluir(codigo);
                         if(retorno){
                             CaixaDeDialogo.obterinstancia().exibirMensagem("Registro excluído com sucesso");
                             atualizarTabela();
@@ -235,13 +226,12 @@ public class TelaClassAcao extends javax.swing.JFrame {
         
         
         
-    }//GEN-LAST:event_jtbClassAcaoMousePressed
+    }//GEN-LAST:event_jtbStatusMousePressed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         // TODO add your handling code here:
         lblId.setText("ID");
         txtNome.setText("");
-        txtLeg.setText("");
         atualizarTabela();
     }//GEN-LAST:event_btnLimparActionPerformed
 
@@ -249,24 +239,23 @@ public class TelaClassAcao extends javax.swing.JFrame {
     private void limparTela(){
         lblId.setText("ID");
         txtNome.setText("");
-        txtLeg.setText("");
         atualizarTabela();
     }
     
     private boolean validarDados(){
-        if(txtNome.getText().equals("")){ 
-            CaixaDeDialogo.obterinstancia().exibirMensagem("Informe uma classe de ação");
+
+        if(txtNome.getText().trim().equals("")){ 
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Informe um status");
             return false;
-        }
+        } 
         return true;
     }
     
-    private ClassAcao guardarDados(){
+    private Status guardarDados(){
         try{
-            ClassAcao objeto = new ClassAcao();
+            Status objeto = new Status();
             
-            objeto.setLeg(txtLeg.getText().trim());
-            objeto.setNome(txtNome.getText().trim());
+            objeto.setStatus(txtNome.getText().trim());
             
             return objeto;
             
@@ -275,12 +264,11 @@ public class TelaClassAcao extends javax.swing.JFrame {
         }
     }
     
-      private void preencherCampos(ClassAcao objeto){
+      private void preencherCampos(Status objeto){
         try{
             
             lblId.setText(String.valueOf(objeto.getId()));
-            txtLeg.setText(objeto.getLeg());
-            txtNome.setText(objeto.getNome());
+            txtNome.setText(objeto.getStatus());
 
             
         }catch(Exception ex){
@@ -290,15 +278,13 @@ public class TelaClassAcao extends javax.swing.JFrame {
       
       private void atualizarTabela() {
         try {
-           ClassAcaoController objClassAcaoController = new ClassAcaoController();
-            objClassAcaoController.preencher(jtbClassAcao);
+           StatusController objStatusController = new StatusController();
+            objStatusController.preencher(jtbStatus);
 
         } catch (Exception ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
         }
     }
-      
-      
       
     
     /**
@@ -318,14 +304,26 @@ public class TelaClassAcao extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaClassAcao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaStatus.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaClassAcao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaStatus.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaClassAcao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaStatus.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaClassAcao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaStatus.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -343,7 +341,7 @@ public class TelaClassAcao extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaClassAcao().setVisible(true);
+                new TelaStatus().setVisible(true);
             }
         });
     }
@@ -354,11 +352,9 @@ public class TelaClassAcao extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jblSalvar;
-    private javax.swing.JTable jtbClassAcao;
-    private javax.swing.JLabel lbLogin;
+    private javax.swing.JTable jtbStatus;
     private javax.swing.JLabel lbNome;
     private javax.swing.JLabel lblId;
-    private javax.swing.JTextField txtLeg;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 }

@@ -192,7 +192,7 @@ public class EstadosController {
         
         try {
 
-            String wSql = " SELECT id, nome FROM estados";
+            String wSql = " SELECT id, nome FROM estados ORDER BY nome";
             
             result = Conexao.stmt.executeQuery(wSql);
             

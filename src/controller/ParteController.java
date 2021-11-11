@@ -21,36 +21,39 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import model.ClassAcao;
+import model.Parte;
 
 
 /**
  *
- * @author kelwin.rodrigues
+ * @author jonas
  */
-public class ClassAcaoController {
+public class ParteController {
     
-    public ClassAcao buscar(String codigo)
+    public Parte buscar(String codigo)
     {
-        ClassAcao objClassAcao = null;
+        Parte objParte = null;
         try {
             Connection con = Conexao.getConnection();
             ResultSet rs = null;
             PreparedStatement stmt = null;
            
-            String wSQL = " SELECT * FROM class_acao WHERE id = ? ";
+            String wSQL = " SELECT * FROM parte WHERE id = ? ";
             stmt = con.prepareStatement(wSQL);
             stmt.setInt(1, Integer.parseInt(codigo));   
     
             rs = stmt.executeQuery();
             
             if(rs.next()){
-                objClassAcao = new ClassAcao();
+                objParte = new Parte();
                 
-                objClassAcao.setId(rs.getInt("id"));
-                objClassAcao.setNome(rs.getString("nome"));
-                objClassAcao.setLeg(rs.getString("leg"));
-                objClassAcao.setExcluido(rs.getBoolean("excluido"));
+                objParte.setId(rs.getInt("id"));
+                objParte.setNome(rs.getString("nome"));
+                objParte.setNome(rs.getString("endereco"));
+                objParte.setIdade(rs.getInt("idade"));
+                objParte.setComplemento(rs.getString("complemento"));
+                objParte.setId_tipo_parte(rs.getInt("id_tipo_parte"));
+                objParte.setId_cidade(rs.getInt("id_cidade"));
 
             }
               
@@ -62,11 +65,11 @@ public class ClassAcaoController {
             return null;
         }
         
-        return objClassAcao;
+        return objParte;
 		
     }
     
-    public boolean verificaExistencia(ClassAcao objeto)
+    public boolean verificaExistencia(Parte objeto)
     {
         try {
             //Conexao.abreConexao();
@@ -74,9 +77,11 @@ public class ClassAcaoController {
             ResultSet rs = null;
             PreparedStatement stmt = null;
            
-            String wSQL = " SELECT id FROM class_acao WHERE nome = ?";
+            String wSQL = " SELECT id FROM parte WHERE nome = ? AND endereco = ? AND idade = ?";
             stmt = con.prepareStatement(wSQL);
             stmt.setString(1, objeto.getNome()); 
+            stmt.setString(2, objeto.getEndereco());
+            stmt.setInt(3, objeto.getIdade());
     
             rs = stmt.executeQuery();
             
@@ -96,7 +101,7 @@ public class ClassAcaoController {
 		
     }
     
-    public String incluir(ClassAcao objeto)
+    public String incluir(Parte objeto)
     {
         try {
             Connection con = Conexao.getConnection();
@@ -104,13 +109,17 @@ public class ClassAcaoController {
             
             //VALIDAR SE O LOGIN EXISTE
             if(verificaExistencia(objeto) == true){
-                return "Classe da ação já cadastrada";
+                return "Parte já Existe";
             }else{
            
-                String wSQL = " INSERT INTO class_acao VALUES(DEFAULT, ?, ?)";
+                String wSQL = " INSERT INTO parte VALUES(DEFAULT, ?, ?, ?, ?, ?, ?)";
                 stmt = con.prepareStatement(wSQL);
-                stmt.setString(1, objeto.getNome());    
-                stmt.setString(2, objeto.getLeg());
+                stmt.setString(1, objeto.getNome());   
+                stmt.setString(2, objeto.getEndereco());   
+                stmt.setInt(3, objeto.getIdade());
+                stmt.setString(4, objeto.getComplemento());
+                stmt.setInt(5, objeto.getId_tipo_parte());  
+                stmt.setInt(6, objeto.getId_cidade());  
 
 
                 stmt.executeUpdate();
@@ -131,16 +140,20 @@ public class ClassAcaoController {
 		
     }
     
-    public boolean alterar(ClassAcao objeto){
+    public boolean alterar(Parte objeto){
         try {
             Connection con = Conexao.getConnection();
             PreparedStatement stmt = null;
             
             //VALIDAR SE O LOGIN EXISTE
-                String wSQL = " UPDATE class_acao SET nome = ? WHERE id = ?";
-                stmt = con.prepareStatement(wSQL);
-                stmt.setString(1, objeto.getNome());               
-                stmt.setInt(2, objeto.getId());
+                String wSQL = " UPDATE parte SET nome = ?, endereco = ?, idade = ?, complemento = ?, id_tipo_parte = ?, id_cidade = ? WHERE id = ?";
+                stmt = con.prepareStatement(wSQL);              
+                stmt.setString(1, objeto.getNome());   
+                stmt.setString(2, objeto.getEndereco());   
+                stmt.setInt(3, objeto.getIdade());
+                stmt.setString(4, objeto.getComplemento());
+                stmt.setInt(5, objeto.getId_tipo_parte());  
+                stmt.setInt(6, objeto.getId_cidade());
                 
 
                 stmt.executeUpdate();
@@ -166,7 +179,7 @@ public class ClassAcaoController {
             Connection con = Conexao.getConnection();
             PreparedStatement stmt = null;
               
-            String wSQL = " DELETE FROM class_acao WHERE id = ? ";
+            String wSQL = " DELETE FROM parte WHERE id = ? ";
             stmt = con.prepareStatement(wSQL);
             stmt.setInt(1, Integer.parseInt(codigo));
 
@@ -198,7 +211,7 @@ public class ClassAcaoController {
         
         try {
 
-            String wSql = " SELECT id, nome FROM class_acao ORDER BY nome ";
+            String wSql = " SELECT id, nome FROM parte ORDER BY nome ";
             
             result = Conexao.stmt.executeQuery(wSql);
             

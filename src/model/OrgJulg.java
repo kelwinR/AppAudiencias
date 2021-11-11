@@ -13,7 +13,6 @@ public class OrgJulg {
     
     private int id;
     private String nome;
-    private boolean excluido;
 
 
     public int getId() {
@@ -31,14 +30,4 @@ public class OrgJulg {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public boolean isExcluido() {
-        return excluido;
-    }
-
-    public void setExcluido(boolean excluido) {
-        this.excluido = excluido;
-    }
-
-    
 }

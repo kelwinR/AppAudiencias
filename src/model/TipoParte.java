@@ -12,7 +12,6 @@ package model;
 public class TipoParte {
     private int id;
     private String tipo;
-     private boolean excluido;
 
     public int getId() {
         return id;
@@ -28,14 +27,6 @@ public class TipoParte {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
-    }
-
-    public boolean isExcluido() {
-        return excluido;
-    }
-
-    public void setExcluido(boolean excluido) {
-        this.excluido = excluido;
     }
         
   }

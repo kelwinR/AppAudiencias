@@ -21,36 +21,34 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import model.ClassAcao;
+import model.Status;
 
 
 /**
  *
  * @author kelwin.rodrigues
  */
-public class ClassAcaoController {
+public class StatusController {
     
-    public ClassAcao buscar(String codigo)
+    public Status buscar(String codigo)
     {
-        ClassAcao objClassAcao = null;
+        Status objStatus = null;
         try {
             Connection con = Conexao.getConnection();
             ResultSet rs = null;
             PreparedStatement stmt = null;
            
-            String wSQL = " SELECT * FROM class_acao WHERE id = ? ";
+            String wSQL = " SELECT * FROM status WHERE id = ? ";
             stmt = con.prepareStatement(wSQL);
             stmt.setInt(1, Integer.parseInt(codigo));   
     
             rs = stmt.executeQuery();
             
             if(rs.next()){
-                objClassAcao = new ClassAcao();
+                objStatus = new Status();
                 
-                objClassAcao.setId(rs.getInt("id"));
-                objClassAcao.setNome(rs.getString("nome"));
-                objClassAcao.setLeg(rs.getString("leg"));
-                objClassAcao.setExcluido(rs.getBoolean("excluido"));
+                objStatus.setId(rs.getInt("id"));
+                objStatus.setStatus(rs.getString("status"));
 
             }
               
@@ -62,11 +60,11 @@ public class ClassAcaoController {
             return null;
         }
         
-        return objClassAcao;
+        return objStatus;
 		
     }
     
-    public boolean verificaExistencia(ClassAcao objeto)
+    public boolean verificaExistencia(Status objeto)
     {
         try {
             //Conexao.abreConexao();
@@ -74,9 +72,9 @@ public class ClassAcaoController {
             ResultSet rs = null;
             PreparedStatement stmt = null;
            
-            String wSQL = " SELECT id FROM class_acao WHERE nome = ?";
+            String wSQL = " SELECT id FROM status WHERE status = ?";
             stmt = con.prepareStatement(wSQL);
-            stmt.setString(1, objeto.getNome()); 
+            stmt.setString(1, objeto.getStatus()); 
     
             rs = stmt.executeQuery();
             
@@ -96,7 +94,7 @@ public class ClassAcaoController {
 		
     }
     
-    public String incluir(ClassAcao objeto)
+    public String incluir(Status objeto)
     {
         try {
             Connection con = Conexao.getConnection();
@@ -104,13 +102,12 @@ public class ClassAcaoController {
             
             //VALIDAR SE O LOGIN EXISTE
             if(verificaExistencia(objeto) == true){
-                return "Classe da ação já cadastrada";
+                return "Status já cadastrado";
             }else{
            
-                String wSQL = " INSERT INTO class_acao VALUES(DEFAULT, ?, ?)";
+                String wSQL = " INSERT INTO status VALUES(DEFAULT, ?)";
                 stmt = con.prepareStatement(wSQL);
-                stmt.setString(1, objeto.getNome());    
-                stmt.setString(2, objeto.getLeg());
+                stmt.setString(1, objeto.getStatus());     
 
 
                 stmt.executeUpdate();
@@ -131,15 +128,15 @@ public class ClassAcaoController {
 		
     }
     
-    public boolean alterar(ClassAcao objeto){
+    public boolean alterar(Status objeto){
         try {
             Connection con = Conexao.getConnection();
             PreparedStatement stmt = null;
             
             //VALIDAR SE O LOGIN EXISTE
-                String wSQL = " UPDATE class_acao SET nome = ? WHERE id = ?";
+                String wSQL = " UPDATE status SET status = ? WHERE id = ?";
                 stmt = con.prepareStatement(wSQL);
-                stmt.setString(1, objeto.getNome());               
+                stmt.setString(1, objeto.getStatus());               
                 stmt.setInt(2, objeto.getId());
                 
 
@@ -166,7 +163,7 @@ public class ClassAcaoController {
             Connection con = Conexao.getConnection();
             PreparedStatement stmt = null;
               
-            String wSQL = " DELETE FROM class_acao WHERE id = ? ";
+            String wSQL = " DELETE FROM status WHERE id = ? ";
             stmt = con.prepareStatement(wSQL);
             stmt.setInt(1, Integer.parseInt(codigo));
 
@@ -191,14 +188,14 @@ public class ClassAcaoController {
         Vector dadosTabela = new Vector(); //receber os dados do banco
         
         cabecalhos.add("Id");
-        cabecalhos.add("Nome");
+        cabecalhos.add("Status");
         cabecalhos.add("Exc");
              
         ResultSet result = null;
         
         try {
 
-            String wSql = " SELECT id, nome FROM class_acao ORDER BY nome ";
+            String wSql = " SELECT id, status FROM status ORDER BY status ";
             
             result = Conexao.stmt.executeQuery(wSql);
             

@@ -9,9 +9,11 @@ package model;
  *
  * @author kelwin.rodrigues
  */
-public class Magistrados {
+public class Eventos {
+    
     private int id;
-    private String nome;
+    private String evento;
+
 
     public int getId() {
         return id;
@@ -21,12 +23,13 @@ public class Magistrados {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getEvento() {
+        return evento;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setEvento(String eventos) {
+        this.evento = eventos;
     }
-       
+
+    
 }

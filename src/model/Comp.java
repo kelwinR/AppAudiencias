@@ -13,7 +13,6 @@ public class Comp {
     
     private int id;
     private String nome;
-    private boolean excluido;
 
     public int getId() {
         return id;
@@ -30,14 +29,5 @@ public class Comp {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public boolean isExcluido() {
-        return excluido;
-    }
-
-    public void setExcluido(boolean excluido) {
-        this.excluido = excluido;
-    }
-    
     
 }

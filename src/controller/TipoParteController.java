@@ -49,7 +49,6 @@ public class TipoParteController {
                 
                 objTipoParte.setId(rs.getInt("id"));
                 objTipoParte.setTipo(rs.getString("tipo"));
-                objTipoParte.setExcluido(rs.getBoolean("excluido"));
 
             }
               
@@ -164,7 +163,7 @@ public class TipoParteController {
             Connection con = Conexao.getConnection();
             PreparedStatement stmt = null;
               
-            String wSQL = " UPDATE tipo_parte SET excluido = true WHERE id = ? ";
+            String wSQL = " DELETE FROM tipo_parte WHERE id = ? ";
             stmt = con.prepareStatement(wSQL);
             stmt.setInt(1, Integer.parseInt(codigo));
 
@@ -196,7 +195,7 @@ public class TipoParteController {
         
         try {
 
-            String wSql = " SELECT id, tipo FROM tipo_parte WHERE COALESCE(excluido,false) = false ORDER BY tipo ";
+            String wSql = " SELECT id, tipo FROM tipo_parte ORDER BY tipo ";
             
             result = Conexao.stmt.executeQuery(wSql);
             
