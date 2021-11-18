@@ -83,6 +83,7 @@ public class TelaParte extends javax.swing.JFrame {
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de Cidade", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
 
@@ -167,7 +168,7 @@ public class TelaParte extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblCidade)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jcbCidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jcbCidade, 0, 1, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblIdade)
@@ -177,7 +178,7 @@ public class TelaParte extends javax.swing.JFrame {
                             .addComponent(lblTipoParte)
                             .addComponent(jcbTipoParte, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -226,7 +227,8 @@ public class TelaParte extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pack();
+        setSize(new java.awt.Dimension(556, 509));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jblSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jblSalvarActionPerformed
@@ -351,10 +353,6 @@ public class TelaParte extends javax.swing.JFrame {
             return false;
         }
         
-        if(txtComplemento.getText().trim().equals("")){ 
-            CaixaDeDialogo.obterinstancia().exibirMensagem("Informe um complemento");
-            return false;
-        }
         
         if(jcbCidade.getSelectedIndex() <= 0){
             CaixaDeDialogo.obterinstancia().exibirMensagem("Escolha uma cidade");
@@ -375,8 +373,10 @@ public class TelaParte extends javax.swing.JFrame {
             
             objeto.setNome(txtNome.getText().trim());
             objeto.setEndereco(txtEndereco.getText().trim());
-            //objeto.setIdade(txtIdade.getText().trim());
+            objeto.setIdade(Integer.parseInt(txtIdade.getText().trim()));
             objeto.setComplemento(txtComplemento.getText().trim());
+            
+            //objeto.setIdade(Integer.parseInt(txtIdade.getText().trim()));
             
             Combo c = (Combo) jcbCidade.getSelectedItem();
             int cod_cidade = Integer.parseInt(c.getCodigo());
@@ -399,7 +399,7 @@ public class TelaParte extends javax.swing.JFrame {
             lblId.setText(String.valueOf(objeto.getId()));
             txtNome.setText(objeto.getNome());
             txtEndereco.setText(objeto.getNome());
-            //txtIdade.setText(objeto.getIdade());
+            txtIdade.setText(String.valueOf(objeto.getIdade()));
             txtComplemento.setText(objeto.getComplemento());
             
             comboCidades.setaComboBox(String.valueOf(objeto.getId_cidade()));

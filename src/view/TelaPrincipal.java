@@ -46,6 +46,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jmiComp = new javax.swing.JMenuItem();
         jmiStatus = new javax.swing.JMenuItem();
         jmiEventos = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
 
@@ -67,26 +68,26 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 80, 260, 190);
+        jScrollPane1.setBounds(10, 80, 330, 240);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(10, 50, 170, 20);
+        jComboBox1.setBounds(10, 50, 230, 20);
 
         btnBuscar.setText("BUSCAR");
         getContentPane().add(btnBuscar);
-        btnBuscar.setBounds(190, 50, 73, 23);
+        btnBuscar.setBounds(253, 50, 80, 23);
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("AUDIÊNCIAS");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 10, 400, 30);
+        jLabel2.setBounds(0, 10, 500, 30);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/fundo.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 400, 280);
+        jLabel1.setBounds(0, 0, 500, 340);
 
         jMenu1.setText("Cadastrar");
 
@@ -162,6 +163,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jmiEventos);
 
+        jMenuItem1.setText("Processo");
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Marcar Audiência");
@@ -172,7 +176,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        setSize(new java.awt.Dimension(416, 339));
+        setSize(new java.awt.Dimension(516, 399));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -319,6 +323,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JMenuItem jmiCidades;
