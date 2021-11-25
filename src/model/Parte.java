@@ -18,6 +18,7 @@ public class Parte {
     private String complemento;
     private int id_tipo_parte;
     private int id_cidade;
+    private int id_processo;
 
     public int getId() {
         return id;
@@ -73,6 +74,14 @@ public class Parte {
 
     public void setId_cidade(int id_cidade) {
         this.id_cidade = id_cidade;
+    }
+
+    public int getId_processo() {
+        return id_processo;
+    }
+
+    public void setId_processo(int id_processo) {
+        this.id_processo = id_processo;
     }
 
     

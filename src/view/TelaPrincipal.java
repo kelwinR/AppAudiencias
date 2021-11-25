@@ -36,7 +36,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        jmiCadastrar = new javax.swing.JMenu();
         jmiEstados = new javax.swing.JMenuItem();
         jmiCidades = new javax.swing.JMenuItem();
         jmiMagistrados = new javax.swing.JMenuItem();
@@ -47,8 +47,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jmiStatus = new javax.swing.JMenuItem();
         jmiEventos = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        jmiParte = new javax.swing.JMenuItem();
+        jmiMarcaAud = new javax.swing.JMenu();
+        jmiAltAud = new javax.swing.JMenu();
+        jmiRelatorios = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -89,7 +91,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 500, 340);
 
-        jMenu1.setText("Cadastrar");
+        jmiCadastrar.setText("Cadastrar");
 
         jmiEstados.setText("Estados");
         jmiEstados.addActionListener(new java.awt.event.ActionListener() {
@@ -97,7 +99,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 jmiEstadosActionPerformed(evt);
             }
         });
-        jMenu1.add(jmiEstados);
+        jmiCadastrar.add(jmiEstados);
 
         jmiCidades.setText("Cidades");
         jmiCidades.addActionListener(new java.awt.event.ActionListener() {
@@ -105,7 +107,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 jmiCidadesActionPerformed(evt);
             }
         });
-        jMenu1.add(jmiCidades);
+        jmiCadastrar.add(jmiCidades);
 
         jmiMagistrados.setText("Magistrados");
         jmiMagistrados.addActionListener(new java.awt.event.ActionListener() {
@@ -113,7 +115,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 jmiMagistradosActionPerformed(evt);
             }
         });
-        jMenu1.add(jmiMagistrados);
+        jmiCadastrar.add(jmiMagistrados);
 
         jmiTipoParte.setText("Tipo de parte");
         jmiTipoParte.addActionListener(new java.awt.event.ActionListener() {
@@ -121,7 +123,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 jmiTipoParteActionPerformed(evt);
             }
         });
-        jMenu1.add(jmiTipoParte);
+        jmiCadastrar.add(jmiTipoParte);
 
         jmiOrgJulg.setText("Orgão Julgador");
         jmiOrgJulg.addActionListener(new java.awt.event.ActionListener() {
@@ -129,7 +131,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 jmiOrgJulgActionPerformed(evt);
             }
         });
-        jMenu1.add(jmiOrgJulg);
+        jmiCadastrar.add(jmiOrgJulg);
 
         jmiClassAcao.setText("Classe da Ação");
         jmiClassAcao.addActionListener(new java.awt.event.ActionListener() {
@@ -137,7 +139,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 jmiClassAcaoActionPerformed(evt);
             }
         });
-        jMenu1.add(jmiClassAcao);
+        jmiCadastrar.add(jmiClassAcao);
 
         jmiComp.setText("Competência");
         jmiComp.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +147,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 jmiCompActionPerformed(evt);
             }
         });
-        jMenu1.add(jmiComp);
+        jmiCadastrar.add(jmiComp);
 
         jmiStatus.setText("Status");
         jmiStatus.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +155,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 jmiStatusActionPerformed(evt);
             }
         });
-        jMenu1.add(jmiStatus);
+        jmiCadastrar.add(jmiStatus);
 
         jmiEventos.setText("Eventos");
         jmiEventos.addActionListener(new java.awt.event.ActionListener() {
@@ -161,18 +163,44 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 jmiEventosActionPerformed(evt);
             }
         });
-        jMenu1.add(jmiEventos);
+        jmiCadastrar.add(jmiEventos);
 
         jMenuItem1.setText("Processo");
-        jMenu1.add(jMenuItem1);
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jmiCadastrar.add(jMenuItem1);
 
-        jMenuBar1.add(jMenu1);
+        jmiParte.setText("Parte");
+        jmiParte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiParteActionPerformed(evt);
+            }
+        });
+        jmiCadastrar.add(jmiParte);
 
-        jMenu2.setText("Marcar Audiência");
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(jmiCadastrar);
 
-        jMenu3.setText("Alterar Audiência");
-        jMenuBar1.add(jMenu3);
+        jmiMarcaAud.setText("Marcar Audiência");
+        jMenuBar1.add(jmiMarcaAud);
+
+        jmiAltAud.setText("Alterar Audiência");
+        jMenuBar1.add(jmiAltAud);
+
+        jmiRelatorios.setText("Relatórios");
+        jmiRelatorios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmiRelatoriosMouseClicked(evt);
+            }
+        });
+        jmiRelatorios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiRelatoriosActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jmiRelatorios);
 
         setJMenuBar(jMenuBar1);
 
@@ -279,6 +307,44 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jmiEventosActionPerformed
 
+    private void jmiRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRelatoriosActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_jmiRelatoriosActionPerformed
+
+    private void jmiRelatoriosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiRelatoriosMouseClicked
+        // TODO add your handling code here:
+         try{
+            TelaRelatorios tela = new TelaRelatorios();
+            tela.setVisible(true);
+
+        }catch(Exception ex){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao sair do programa");
+        }
+    }//GEN-LAST:event_jmiRelatoriosMouseClicked
+
+    private void jmiParteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiParteActionPerformed
+        // TODO add your handling code here:
+         try{
+            TelaParte tela = new TelaParte();
+            tela.setVisible(true);
+
+        }catch(Exception ex){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao sair do programa");
+        }
+    }//GEN-LAST:event_jmiParteActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        try{
+            TelaProcesso tela = new TelaProcesso();
+            tela.setVisible(true);
+
+        }catch(Exception ex){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao sair do programa");
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -319,20 +385,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JMenu jmiAltAud;
+    private javax.swing.JMenu jmiCadastrar;
     private javax.swing.JMenuItem jmiCidades;
     private javax.swing.JMenuItem jmiClassAcao;
     private javax.swing.JMenuItem jmiComp;
     private javax.swing.JMenuItem jmiEstados;
     private javax.swing.JMenuItem jmiEventos;
     private javax.swing.JMenuItem jmiMagistrados;
+    private javax.swing.JMenu jmiMarcaAud;
     private javax.swing.JMenuItem jmiOrgJulg;
+    private javax.swing.JMenuItem jmiParte;
+    private javax.swing.JMenu jmiRelatorios;
     private javax.swing.JMenuItem jmiStatus;
     private javax.swing.JMenuItem jmiTipoParte;
     // End of variables declaration//GEN-END:variables

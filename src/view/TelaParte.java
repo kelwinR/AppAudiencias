@@ -26,6 +26,7 @@ public class TelaParte extends javax.swing.JFrame {
            ParteController objParteController;
             Combo comboCidades;
             Combo comboTipoParte;
+            Combo comboProcesso;
     /**
      * Creates new form TelaUsuarios
      */
@@ -40,7 +41,9 @@ public class TelaParte extends javax.swing.JFrame {
         comboTipoParte = new Combo(jcbTipoParte);
         comboTipoParte.preencheCombo("SELECT id, tipo FROM tipo_parte ORDER BY tipo");
         
-        
+        comboProcesso = new Combo(jcbProcesso);
+        comboProcesso.preencheCombo("SELECT id, num FROM processo ORDER BY num");
+
         
        }catch(SQLException ex){
            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro no init");
@@ -69,7 +72,7 @@ public class TelaParte extends javax.swing.JFrame {
         jblSalvar = new javax.swing.JButton();
         lblId = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtbCidades = new javax.swing.JTable();
+        jtbPartes = new javax.swing.JTable();
         lblEndereco = new javax.swing.JLabel();
         txtEndereco = new javax.swing.JTextField();
         lblIdade = new javax.swing.JLabel();
@@ -79,13 +82,15 @@ public class TelaParte extends javax.swing.JFrame {
         txtComplemento = new javax.swing.JTextArea();
         lblCidade = new javax.swing.JLabel();
         jcbCidade = new javax.swing.JComboBox<>();
+        jcbProcesso = new javax.swing.JComboBox<>();
 
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(540, 500));
         setResizable(false);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de Cidade", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de Parte", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
 
         lbNome.setText("Nome");
 
@@ -109,7 +114,7 @@ public class TelaParte extends javax.swing.JFrame {
 
         lblId.setText("ID");
 
-        jtbCidades.setModel(new javax.swing.table.DefaultTableModel(
+        jtbPartes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -120,12 +125,12 @@ public class TelaParte extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jtbCidades.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtbPartes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jtbCidadesMousePressed(evt);
+                jtbPartesMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(jtbCidades);
+        jScrollPane1.setViewportView(jtbPartes);
 
         lblEndereco.setText("Endereço");
 
@@ -141,6 +146,8 @@ public class TelaParte extends javax.swing.JFrame {
 
         jcbCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jcbProcesso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -148,21 +155,13 @@ public class TelaParte extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jcbProcesso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtEndereco)
                     .addComponent(txtNome)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lbNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblId))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblComplemento)
-                            .addComponent(lblEndereco)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jblSalvar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnLimpar)))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -178,7 +177,16 @@ public class TelaParte extends javax.swing.JFrame {
                             .addComponent(lblTipoParte)
                             .addComponent(jcbTipoParte, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblComplemento)
+                            .addComponent(lblEndereco)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jblSalvar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnLimpar)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -204,15 +212,17 @@ public class TelaParte extends javax.swing.JFrame {
                     .addComponent(jcbTipoParte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcbCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblComplemento)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jcbProcesso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblComplemento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jblSalvar)
                     .addComponent(btnLimpar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -227,7 +237,7 @@ public class TelaParte extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(556, 509));
+        setSize(new java.awt.Dimension(556, 639));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -265,21 +275,21 @@ public class TelaParte extends javax.swing.JFrame {
         atualizarTabela();
     }//GEN-LAST:event_jblSalvarActionPerformed
 
-    private void jtbCidadesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbCidadesMousePressed
+    private void jtbPartesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbPartesMousePressed
         // TODO add your handling code here:
          try {
             //pega a linha selecionada
-            int linhaSelecionada = jtbCidades.getSelectedRow();
+            int linhaSelecionada = jtbPartes.getSelectedRow();
 
             // Primeira coluna da linha
-            String codigo = jtbCidades.getModel().getValueAt(linhaSelecionada, 0).toString();
+            String codigo = jtbPartes.getModel().getValueAt(linhaSelecionada, 0).toString();
 
             //buscar no banco de dados o registro e preencher nos campos da tela
            ParteController objParteController = new ParteController();
             Parte objeto = objParteController.buscar(codigo);
                 
             //Verifica se clicou na coluna 2 => EXCLUIR
-            if (jtbCidades.isColumnSelected(2)) {
+            if (jtbPartes.isColumnSelected(2)) {
                 try {
                     boolean wPergunta = CaixaDeDialogo.obterinstancia()
                             .pedirConfirmacao("Tem certeza de que deseja excluir?", "", 'p');
@@ -311,7 +321,7 @@ public class TelaParte extends javax.swing.JFrame {
         
         
         
-    }//GEN-LAST:event_jtbCidadesMousePressed
+    }//GEN-LAST:event_jtbPartesMousePressed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         // TODO add your handling code here:
@@ -322,6 +332,7 @@ public class TelaParte extends javax.swing.JFrame {
         txtComplemento.setText("");
         jcbTipoParte.setSelectedIndex(0);
         jcbCidade.setSelectedIndex(0);
+        jcbProcesso.setSelectedIndex(0);
         atualizarTabela();
     }//GEN-LAST:event_btnLimparActionPerformed
 
@@ -334,6 +345,7 @@ public class TelaParte extends javax.swing.JFrame {
         txtComplemento.setText("");
         jcbTipoParte.setSelectedIndex(0);
         jcbCidade.setSelectedIndex(0);
+        jcbProcesso.setSelectedIndex(0);
         atualizarTabela();
     }
     
@@ -363,6 +375,11 @@ public class TelaParte extends javax.swing.JFrame {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Escolha um tipo de parte");
             return false;
         }
+        
+         if(jcbProcesso.getSelectedIndex() <= 0){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Escolha um processo");
+            return false;
+        }
       
         return true;
     }
@@ -386,6 +403,10 @@ public class TelaParte extends javax.swing.JFrame {
             int cod_tipo_parte = Integer.parseInt(a.getCodigo());
             objeto.setId_tipo_parte(cod_tipo_parte);
             
+            Combo b = (Combo) jcbProcesso.getSelectedItem();
+            int cod_processo = Integer.parseInt(b.getCodigo());
+            objeto.setId_cidade(cod_processo);
+            
             return objeto;
             
         }catch(Exception ex){
@@ -404,6 +425,8 @@ public class TelaParte extends javax.swing.JFrame {
             
             comboCidades.setaComboBox(String.valueOf(objeto.getId_cidade()));
             comboTipoParte.setaComboBox(String.valueOf(objeto.getId_tipo_parte()));
+            comboProcesso.setaComboBox(String.valueOf(objeto.getId_processo()));
+            
             
         }catch(Exception ex){
             CaixaDeDialogo.obterinstancia().exibirMensagem(ex.getMessage(), 'e');
@@ -413,7 +436,7 @@ public class TelaParte extends javax.swing.JFrame {
       private void atualizarTabela() {
         try {
            ParteController objParteController = new ParteController();
-            objParteController.preencher(jtbCidades);
+            objParteController.preencher(jtbPartes);
 
         } catch (Exception ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
@@ -476,8 +499,9 @@ public class TelaParte extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jblSalvar;
     private javax.swing.JComboBox<String> jcbCidade;
+    private javax.swing.JComboBox<String> jcbProcesso;
     private javax.swing.JComboBox<String> jcbTipoParte;
-    private javax.swing.JTable jtbCidades;
+    private javax.swing.JTable jtbPartes;
     private javax.swing.JLabel lbNome;
     private javax.swing.JLabel lblCidade;
     private javax.swing.JLabel lblComplemento;

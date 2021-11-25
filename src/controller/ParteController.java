@@ -54,6 +54,7 @@ public class ParteController {
                 objParte.setComplemento(rs.getString("complemento"));
                 objParte.setId_tipo_parte(rs.getInt("id_tipo_parte"));
                 objParte.setId_cidade(rs.getInt("id_cidade"));
+                objParte.setId_cidade(rs.getInt("id_processo"));
 
             }
               
@@ -112,7 +113,7 @@ public class ParteController {
                 return "Parte já Existe";
             }else{
            
-                String wSQL = " INSERT INTO parte VALUES(DEFAULT, ?, ?, ?, ?, ?, ?)";
+                String wSQL = " INSERT INTO parte VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?)";
                 stmt = con.prepareStatement(wSQL);
                 stmt.setString(1, objeto.getNome());   
                 stmt.setString(2, objeto.getEndereco());   
@@ -120,6 +121,7 @@ public class ParteController {
                 stmt.setString(4, objeto.getComplemento());
                 stmt.setInt(5, objeto.getId_tipo_parte());  
                 stmt.setInt(6, objeto.getId_cidade());  
+                stmt.setInt(7, objeto.getId_processo());  
 
 
                 stmt.executeUpdate();
@@ -146,7 +148,7 @@ public class ParteController {
             PreparedStatement stmt = null;
             
             //VALIDAR SE O LOGIN EXISTE
-                String wSQL = " UPDATE parte SET nome = ?, endereco = ?, idade = ?, complemento = ?, id_tipo_parte = ?, id_cidade = ? WHERE id = ?";
+                String wSQL = " UPDATE parte SET nome = ?, endereco = ?, idade = ?, complemento = ?, id_tipo_parte = ?, id_cidade = ?, id_processo = ? WHERE id = ?";
                 stmt = con.prepareStatement(wSQL);              
                 stmt.setString(1, objeto.getNome());   
                 stmt.setString(2, objeto.getEndereco());   
@@ -154,6 +156,7 @@ public class ParteController {
                 stmt.setString(4, objeto.getComplemento());
                 stmt.setInt(5, objeto.getId_tipo_parte());  
                 stmt.setInt(6, objeto.getId_cidade());
+                stmt.setInt(7, objeto.getId_processo());
                 
 
                 stmt.executeUpdate();
