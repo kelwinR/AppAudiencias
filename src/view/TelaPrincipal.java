@@ -5,21 +5,127 @@
  */
 package view;
 
+import controller.AudienciasController;
+import java.sql.SQLException;
 import tools.CaixaDeDialogo;
+import tools.Combo;
+import db.Conexao;
+import java.awt.Color;
+import java.awt.Component;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Vector;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
  * @author Windows 10
  */
 public class TelaPrincipal extends javax.swing.JFrame {
-
+        
+    Combo comboStatus;
     /**
      * Creates new form TelaPrincipal
      */
-    public TelaPrincipal() {
-        initComponents();
-    }
+  /*  
+    public void preencher(JTable jtbUsuarios) {
 
+        Conexao.abreConexao();
+        
+        Vector<String> cabecalhos = new Vector<String>();
+        Vector dadosTabela = new Vector(); //receber os dados do banco
+        
+        cabecalhos.add("Número");
+        cabecalhos.add("Data");
+        cabecalhos.add("Status");
+        cabecalhos.add("Evento");
+             
+        ResultSet result = null;
+        
+        try {
+
+            StringBuilder sql = new StringBuilder();
+            sql.append("SELECT p.num, a.data, s.status, e.evento\n" +
+                        "FROM audiencia a, processo p, status s, eventos e\n" +
+                        "WHERE p.id = a.id_processo\n" +
+                        "AND s.id = a.id_status\n" +
+                        "AND e.id = a.id_evento\n" +
+                        "ORDER BY a.data");
+           
+            
+            result = Conexao.stmt.executeQuery(sql.toString());
+            
+            Vector<Object> linha;
+            while(result.next()) {
+                linha = new Vector<Object>();
+                
+                linha.add(result.getInt(1));
+                linha.add(result.getInt(2));
+                linha.add(result.getString(3));
+                linha.add(result.getString(4));
+ 
+                
+                dadosTabela.add(linha);
+            }
+            
+        } catch (Exception e) {
+            System.out.println("problemas para popular tabela...");
+            System.out.println(e);
+        }        
+
+        jtbUsuarios.setModel(new DefaultTableModel(dadosTabela, cabecalhos) {
+
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+              return false;
+            }
+            // permite seleção de apenas uma linha da tabela
+        });
+
+
+        // permite seleção de apenas uma linha da tabela
+        jtbUsuarios.setSelectionMode(0);
+
+
+        // redimensiona as colunas de uma tabela
+        TableColumn column = null;
+        for (int i = 0; i <= 4; i++) {
+            column = 
+
+            jtbUsuarios.getColumnModel().getColumn(i);
+            switch (i) {
+                case 0:
+                    column.setPreferredWidth(60);//num 
+                    break;
+                case 1:
+                    column.setPreferredWidth(100);//data
+                    break;                   
+                case 2:
+                    column.setPreferredWidth(100);//status
+                    break;
+                case 3:
+                    column.setPreferredWidth(100);//evento
+                    break;
+            }
+        }
+    }
+    */
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,8 +136,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jtbAud = new javax.swing.JTable();
+        jcbStatus = new javax.swing.JComboBox<>();
         btnBuscar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -48,15 +154,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jmiEventos = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jmiParte = new javax.swing.JMenuItem();
+        jmiSala = new javax.swing.JMenuItem();
         jmiMarcaAud = new javax.swing.JMenu();
-        jmiAltAud = new javax.swing.JMenu();
         jmiRelatorios = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtbAud.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -67,16 +173,26 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jtbAud.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jtbAudMousePressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtbAud);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(10, 80, 330, 240);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(10, 50, 230, 20);
+        jcbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jcbStatus);
+        jcbStatus.setBounds(10, 50, 230, 20);
 
         btnBuscar.setText("BUSCAR");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnBuscar);
         btnBuscar.setBounds(253, 50, 80, 23);
 
@@ -181,13 +297,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jmiCadastrar.add(jmiParte);
 
+        jmiSala.setText("Sala");
+        jmiSala.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiSalaActionPerformed(evt);
+            }
+        });
+        jmiCadastrar.add(jmiSala);
+
         jMenuBar1.add(jmiCadastrar);
 
-        jmiMarcaAud.setText("Marcar Audiência");
+        jmiMarcaAud.setText("Marcar/Alterar Audiência");
+        jmiMarcaAud.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmiMarcaAudMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jmiMarcaAud);
-
-        jmiAltAud.setText("Alterar Audiência");
-        jMenuBar1.add(jmiAltAud);
 
         jmiRelatorios.setText("Relatórios");
         jmiRelatorios.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -345,6 +471,38 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jmiSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSalaActionPerformed
+        // TODO add your handling code here:
+        try{
+            TelaSala tela = new TelaSala();
+            tela.setVisible(true);
+
+        }catch(Exception ex){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao sair do programa");
+        }
+    }//GEN-LAST:event_jmiSalaActionPerformed
+
+    private void jmiMarcaAudMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiMarcaAudMouseClicked
+        // TODO add your handling code here:
+        try{
+            TelaAudiencias tela = new TelaAudiencias();
+            tela.setVisible(true);
+
+        }catch(Exception ex){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao sair do programa");
+        }
+    }//GEN-LAST:event_jmiMarcaAudMouseClicked
+
+    private void jtbAudMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbAudMousePressed
+
+    }//GEN-LAST:event_jtbAudMousePressed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    
     /**
      * @param args the command line arguments
      */
@@ -382,14 +540,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JMenu jmiAltAud;
+    private javax.swing.JComboBox<String> jcbStatus;
     private javax.swing.JMenu jmiCadastrar;
     private javax.swing.JMenuItem jmiCidades;
     private javax.swing.JMenuItem jmiClassAcao;
@@ -401,7 +557,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiOrgJulg;
     private javax.swing.JMenuItem jmiParte;
     private javax.swing.JMenu jmiRelatorios;
+    private javax.swing.JMenuItem jmiSala;
     private javax.swing.JMenuItem jmiStatus;
     private javax.swing.JMenuItem jmiTipoParte;
+    private javax.swing.JTable jtbAud;
     // End of variables declaration//GEN-END:variables
 }

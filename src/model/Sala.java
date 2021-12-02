@@ -9,11 +9,12 @@ package model;
  *
  * @author kelwin.rodrigues
  */
-public class Salas {
+public class Sala {
     
     private int id;
     private String nome;
-    private boolean numero;
+    private int num;
+
 
     public int getId() {
         return id;
@@ -31,13 +32,16 @@ public class Salas {
         this.nome = nome;
     }
 
-    public boolean isNumero() {
-        return numero;
+    public int getNum() {
+        return num;
     }
 
-    public void setNumero(boolean numero) {
-        this.numero = numero;
+    public void setNum(int num) {
+        this.num = num;
     }
-    
+
+   
+
+   
     
 }

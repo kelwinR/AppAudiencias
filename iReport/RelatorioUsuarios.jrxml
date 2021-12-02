@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioAlunos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f681b183-9ae8-4e25-ae65-13fc6043097e">
 	<property name="ireport.zoom" value="1.2100000000000009"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="POSTGRES"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<queryString>
-		<![CDATA[select * from usuarios]]>
+		<![CDATA[select * from estados]]>
 	</queryString>
-	<field name="id" class="java.lang.Integer"/>
-	<field name="nome" class="java.lang.String"/>
-	<field name="login" class="java.lang.String"/>
-	<field name="senha" class="java.lang.String"/>
+	<field name="id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="estados"/>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nome"/>
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="estados"/>
+	</field>
+	<field name="sigla" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="sigla"/>
+		<property name="com.jaspersoft.studio.field.label" value="sigla"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="estados"/>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -46,7 +60,7 @@
 			</staticText>
 			<staticText>
 				<reportElement x="326" y="1" width="100" height="20" uuid="594e31a8-e11c-4272-bb41-250655359241"/>
-				<text><![CDATA[login]]></text>
+				<text><![CDATA[sigla]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -62,7 +76,7 @@
 			</textField>
 			<textField>
 				<reportElement x="326" y="23" width="100" height="20" uuid="c81bb79d-1229-47f6-801e-c64a84ac0bcf"/>
-				<textFieldExpression><![CDATA[$F{login}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sigla}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

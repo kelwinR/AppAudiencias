@@ -12,7 +12,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
 import java.util.List;
 import java.util.logging.Level;
@@ -21,40 +23,38 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import model.Parte;
-
+import model.Audiencias;
+//import model.Usuario;
 
 /**
  *
- * @author jonas
+ * @author 
  */
-public class ParteController {
+public class AudienciasController {
     
-    public Parte buscar(String codigo)
+    public Audiencias buscar(String codigo)
     {
-        Parte objParte = null;
+        Audiencias objAudiencias = null;
         try {
             Connection con = Conexao.getConnection();
             ResultSet rs = null;
             PreparedStatement stmt = null;
            
-            String wSQL = " SELECT * FROM parte WHERE id = ? ";
+            String wSQL = " SELECT * FROM audiencia WHERE id = ? ";
             stmt = con.prepareStatement(wSQL);
             stmt.setInt(1, Integer.parseInt(codigo));   
     
             rs = stmt.executeQuery();
             
             if(rs.next()){
-                objParte = new Parte();
+                objAudiencias = new Audiencias();
                 
-                objParte.setId(rs.getInt("id"));
-                objParte.setNome(rs.getString("nome"));
-                objParte.setNome(rs.getString("endereco"));
-                objParte.setIdade(rs.getInt("idade"));
-                objParte.setComplemento(rs.getString("complemento"));
-                objParte.setId_tipo_parte(rs.getInt("id_tipo_parte"));
-                objParte.setId_cidade(rs.getInt("id_cidade"));
-                objParte.setId_cidade(rs.getInt("id_processo"));
+                objAudiencias.setId(rs.getInt("id"));
+                objAudiencias.setData(rs.getString("data"));
+                objAudiencias.setId_processo(rs.getInt("id_processo"));
+                objAudiencias.setId_sala(rs.getInt("id_sala"));
+                objAudiencias.setId_status(rs.getInt("id_status"));
+                objAudiencias.setId_evento(rs.getInt("id_evento"));
 
             }
               
@@ -66,11 +66,11 @@ public class ParteController {
             return null;
         }
         
-        return objParte;
+        return objAudiencias;
 		
     }
     
-    public boolean verificaExistencia(Parte objeto)
+    public boolean verificaExistencia(Audiencias objeto)
     {
         try {
             //Conexao.abreConexao();
@@ -78,11 +78,10 @@ public class ParteController {
             ResultSet rs = null;
             PreparedStatement stmt = null;
            
-            String wSQL = " SELECT id FROM parte WHERE nome = ? AND endereco = ? AND idade = ?";
+            String wSQL = " SELECT id FROM audiencia WHERE data = ? AND id_processo = ?";
             stmt = con.prepareStatement(wSQL);
-            stmt.setString(1, objeto.getNome()); 
-            stmt.setString(2, objeto.getEndereco());
-            stmt.setInt(3, objeto.getIdade());
+            stmt.setString(1, objeto.getData());
+            stmt.setInt(2, objeto.getId_processo()); 
     
             rs = stmt.executeQuery();
             
@@ -102,7 +101,7 @@ public class ParteController {
 		
     }
     
-    public String incluir(Parte objeto)
+    public String incluir(Audiencias objeto)
     {
         try {
             Connection con = Conexao.getConnection();
@@ -110,18 +109,20 @@ public class ParteController {
             
             //VALIDAR SE O LOGIN EXISTE
             if(verificaExistencia(objeto) == true){
-                return "Parte já Existe";
+                return "Audiência já Existe";
             }else{
            
-                String wSQL = " INSERT INTO parte VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?)";
+                String wSQL = " INSERT INTO audiencia VALUES(DEFAULT, ?, ?, ?, ?, ?)";
                 stmt = con.prepareStatement(wSQL);
-                stmt.setString(1, objeto.getNome());   
-                stmt.setString(2, objeto.getEndereco());   
-                stmt.setInt(3, objeto.getIdade());
-                stmt.setString(4, objeto.getComplemento());
-                stmt.setInt(5, objeto.getId_tipo_parte());  
-                stmt.setInt(6, objeto.getId_cidade());  
-                stmt.setInt(7, objeto.getId_processo());  
+              Date date = java.sql.Date.valueOf(objeto.getData());
+                stmt.setDate(1, (java.sql.Date) date);   
+                stmt.setInt(2, objeto.getId_processo());  
+                stmt.setInt(3, objeto.getId_sala());  
+                stmt.setInt(4, objeto.getId_status());  
+                stmt.setInt(5, objeto.getId_evento()); 
+                
+                
+                   
 
 
                 stmt.executeUpdate();
@@ -142,21 +143,17 @@ public class ParteController {
 		
     }
     
-    public boolean alterar(Parte objeto){
+    public boolean alterar(Audiencias objeto){
         try {
             Connection con = Conexao.getConnection();
             PreparedStatement stmt = null;
             
             //VALIDAR SE O LOGIN EXISTE
-                String wSQL = " UPDATE parte SET nome = ?, endereco = ?, idade = ?, complemento = ?, id_tipo_parte = ?, id_cidade = ?, id_processo = ? WHERE id = ?";
-                stmt = con.prepareStatement(wSQL);              
-                stmt.setString(1, objeto.getNome());   
-                stmt.setString(2, objeto.getEndereco());   
-                stmt.setInt(3, objeto.getIdade());
-                stmt.setString(4, objeto.getComplemento());
-                stmt.setInt(5, objeto.getId_tipo_parte());  
-                stmt.setInt(6, objeto.getId_cidade());
-                stmt.setInt(7, objeto.getId_processo());
+                String wSQL = " UPDATE audiencia SET data = ?, id_processo = ? WHERE id = ?";
+                stmt = con.prepareStatement(wSQL);
+                stmt.setString(1, objeto.getData());               
+                stmt.setInt(2, objeto.getId_processo());
+                stmt.setInt(3, objeto.getId());
                 
 
                 stmt.executeUpdate();
@@ -182,7 +179,7 @@ public class ParteController {
             Connection con = Conexao.getConnection();
             PreparedStatement stmt = null;
               
-            String wSQL = "DELETE FROM parte WHERE id = ? ";
+            String wSQL = " UPDATE audiencia SET excluido = true WHERE id = ? ";
             stmt = con.prepareStatement(wSQL);
             stmt.setInt(1, Integer.parseInt(codigo));
 
@@ -207,23 +204,26 @@ public class ParteController {
         Vector dadosTabela = new Vector(); //receber os dados do banco
         
         cabecalhos.add("Id");
-        cabecalhos.add("Nome");
+        cabecalhos.add("Processo");
         cabecalhos.add("Exc");
              
         ResultSet result = null;
         
         try {
 
-            String wSql = " SELECT id, nome FROM parte ORDER BY nome ";
+            StringBuilder sql = new StringBuilder();
+            sql.append("SELECT a.id, p.num FROM audiencia a, processo p ORDER BY id");
+           
             
-            result = Conexao.stmt.executeQuery(wSql);
+            result = Conexao.stmt.executeQuery(sql.toString());
             
             Vector<Object> linha;
             while(result.next()) {
                 linha = new Vector<Object>();
                 
                 linha.add(result.getInt(1));
-                linha.add(result.getString(2));    
+                linha.add(result.getString(2));
+ 
 
                 linha.add("X");
                 
@@ -262,7 +262,7 @@ public class ParteController {
                     break;
                 case 1:
                     column.setPreferredWidth(200);//nome
-                    break;
+                    break;                   
                 case 2:
                     column.setPreferredWidth(10);//x do excluir
                     break;

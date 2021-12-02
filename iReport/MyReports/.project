@@ -46,5 +46,10 @@
 			<type>1</type>
 			<location>H:/Projetos2021B/AppAudiencias/AppAudiencias/iReport/RelatorioCidades.jasper</location>
 		</link>
+		<link>
+			<name>RelatorioUsuarios.jrxml</name>
+			<type>1</type>
+			<location>H:/Projetos2021B/AppAudiencias/AppAudiencias/iReport/RelatorioUsuarios.jrxml</location>
+		</link>
 	</linkedResources>
 </projectDescription>

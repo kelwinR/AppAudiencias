@@ -11,12 +11,12 @@ package model;
  */
 public class Audiencias {
     
-    /*private int id;
-    private int num;
-    private int id_org_julg;
-    private int id_comp;
-    private int id_class_acao;
-    private int id_magistrado;
+    private int id;
+    private String data;
+    private int id_processo;
+    private int id_sala;
+    private int id_status;
+    private int id_evento;
 
     public int getId() {
         return id;
@@ -26,44 +26,48 @@ public class Audiencias {
         this.id = id;
     }
 
-    public int getNum() {
-        return num;
+    public String getData() {
+        return data;
     }
 
-    public void setNum(int num) {
-        this.num = num;
+    public void setData(String data) {
+        this.data = data;
     }
 
-    public int getId_org_julg() {
-        return id_org_julg;
+
+    public int getId_processo() {
+        return id_processo;
     }
 
-    public void setId_org_julg(int id_org_julg) {
-        this.id_org_julg = id_org_julg;
+    public void setId_processo(int id_processo) {
+        this.id_processo = id_processo;
     }
 
-    public int getId_comp() {
-        return id_comp;
+    public int getId_status() {
+        return id_status;
     }
 
-    public void setId_comp(int id_comp) {
-        this.id_comp = id_comp;
+    public void setId_status(int id_status) {
+        this.id_status = id_status;
     }
 
-    public int getId_class_acao() {
-        return id_class_acao;
+    public int getId_evento() {
+        return id_evento;
     }
 
-    public void setId_class_acao(int id_class_acao) {
-        this.id_class_acao = id_class_acao;
+    public void setId_evento(int id_evento) {
+        this.id_evento = id_evento;
     }
 
-    public int getId_magistrado() {
-        return id_magistrado;
+    public int getId_sala() {
+        return id_sala;
     }
 
-    public void setId_magistrado(int id_magistrado) {
-        this.id_magistrado = id_magistrado;
-    }*/
+    public void setId_sala(int id_sala) {
+        this.id_sala = id_sala;
+    }
+    
+    
 
+    
 }

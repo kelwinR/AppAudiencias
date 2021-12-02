@@ -21,40 +21,35 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import model.Parte;
-
+import model.Sala;
+//import model.Usuario;
 
 /**
  *
  * @author jonas
  */
-public class ParteController {
+public class SalaController {
     
-    public Parte buscar(String codigo)
+    public Sala buscar(String codigo)
     {
-        Parte objParte = null;
+        Sala objSala = null;
         try {
             Connection con = Conexao.getConnection();
             ResultSet rs = null;
             PreparedStatement stmt = null;
            
-            String wSQL = " SELECT * FROM parte WHERE id = ? ";
+            String wSQL = " SELECT * FROM sala WHERE id = ? ";
             stmt = con.prepareStatement(wSQL);
             stmt.setInt(1, Integer.parseInt(codigo));   
     
             rs = stmt.executeQuery();
             
             if(rs.next()){
-                objParte = new Parte();
+                objSala = new Sala();
                 
-                objParte.setId(rs.getInt("id"));
-                objParte.setNome(rs.getString("nome"));
-                objParte.setNome(rs.getString("endereco"));
-                objParte.setIdade(rs.getInt("idade"));
-                objParte.setComplemento(rs.getString("complemento"));
-                objParte.setId_tipo_parte(rs.getInt("id_tipo_parte"));
-                objParte.setId_cidade(rs.getInt("id_cidade"));
-                objParte.setId_cidade(rs.getInt("id_processo"));
+                objSala.setId(rs.getInt("id"));
+                objSala.setNome(rs.getString("nome"));
+                objSala.setNum(rs.getInt("num"));
 
             }
               
@@ -66,11 +61,11 @@ public class ParteController {
             return null;
         }
         
-        return objParte;
+        return objSala;
 		
     }
     
-    public boolean verificaExistencia(Parte objeto)
+    public boolean verificaExistencia(Sala objeto)
     {
         try {
             //Conexao.abreConexao();
@@ -78,11 +73,10 @@ public class ParteController {
             ResultSet rs = null;
             PreparedStatement stmt = null;
            
-            String wSQL = " SELECT id FROM parte WHERE nome = ? AND endereco = ? AND idade = ?";
+            String wSQL = " SELECT id FROM sala WHERE nome = ? AND num = ?";
             stmt = con.prepareStatement(wSQL);
             stmt.setString(1, objeto.getNome()); 
-            stmt.setString(2, objeto.getEndereco());
-            stmt.setInt(3, objeto.getIdade());
+            stmt.setInt(2, objeto.getNum()); 
     
             rs = stmt.executeQuery();
             
@@ -102,7 +96,7 @@ public class ParteController {
 		
     }
     
-    public String incluir(Parte objeto)
+    public String incluir(Sala objeto)
     {
         try {
             Connection con = Conexao.getConnection();
@@ -110,18 +104,13 @@ public class ParteController {
             
             //VALIDAR SE O LOGIN EXISTE
             if(verificaExistencia(objeto) == true){
-                return "Parte já Existe";
+                return "Sala já Existe";
             }else{
            
-                String wSQL = " INSERT INTO parte VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?)";
+                String wSQL = " INSERT INTO sala VALUES(DEFAULT, ?, ?)";
                 stmt = con.prepareStatement(wSQL);
-                stmt.setString(1, objeto.getNome());   
-                stmt.setString(2, objeto.getEndereco());   
-                stmt.setInt(3, objeto.getIdade());
-                stmt.setString(4, objeto.getComplemento());
-                stmt.setInt(5, objeto.getId_tipo_parte());  
-                stmt.setInt(6, objeto.getId_cidade());  
-                stmt.setInt(7, objeto.getId_processo());  
+                stmt.setString(1, objeto.getNome());    
+                stmt.setInt(2, objeto.getNum());  
 
 
                 stmt.executeUpdate();
@@ -142,21 +131,17 @@ public class ParteController {
 		
     }
     
-    public boolean alterar(Parte objeto){
+    public boolean alterar(Sala objeto){
         try {
             Connection con = Conexao.getConnection();
             PreparedStatement stmt = null;
             
             //VALIDAR SE O LOGIN EXISTE
-                String wSQL = " UPDATE parte SET nome = ?, endereco = ?, idade = ?, complemento = ?, id_tipo_parte = ?, id_cidade = ?, id_processo = ? WHERE id = ?";
-                stmt = con.prepareStatement(wSQL);              
-                stmt.setString(1, objeto.getNome());   
-                stmt.setString(2, objeto.getEndereco());   
-                stmt.setInt(3, objeto.getIdade());
-                stmt.setString(4, objeto.getComplemento());
-                stmt.setInt(5, objeto.getId_tipo_parte());  
-                stmt.setInt(6, objeto.getId_cidade());
-                stmt.setInt(7, objeto.getId_processo());
+                String wSQL = " UPDATE sala SET nome = ?, num = ? WHERE id = ?";
+                stmt = con.prepareStatement(wSQL);
+                stmt.setString(1, objeto.getNome());               
+                stmt.setInt(2, objeto.getNum());
+                stmt.setInt(3, objeto.getId());
                 
 
                 stmt.executeUpdate();
@@ -182,7 +167,7 @@ public class ParteController {
             Connection con = Conexao.getConnection();
             PreparedStatement stmt = null;
               
-            String wSQL = "DELETE FROM parte WHERE id = ? ";
+            String wSQL = " DELETE FROM sala WHERE id = ? ";
             stmt = con.prepareStatement(wSQL);
             stmt.setInt(1, Integer.parseInt(codigo));
 
@@ -214,7 +199,7 @@ public class ParteController {
         
         try {
 
-            String wSql = " SELECT id, nome FROM parte ORDER BY nome ";
+            String wSql = " SELECT id, nome FROM sala ORDER BY nome ";
             
             result = Conexao.stmt.executeQuery(wSql);
             
